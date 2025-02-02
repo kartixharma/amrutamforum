@@ -64,37 +64,21 @@ const addThoughts = () => {
         try {
           const result = await DocumentPicker.getDocumentAsync({
             type: 'application/pdf',
-          });
-      
-          console.log('Document Picker Result:', result); 
+          });     
       
           if (result.type !== 'cancel') {
             const fileUri = result.uri || result.assets?.[0]?.uri;
-            if (!fileUri) {
-              console.error('No URI found in result');
+            if (!fileUri) { 
               return;
             }
       
             setUri(fileUri);
             setFileType('file');
-      
-            const name = await getFileNameFromUri(fileUri);
             const size = await getFileSizeFromUri(fileUri);
-            setFileName(name);
+            setFileName(result.assets?.[0]?.name || 'Unknown Name');
             setFileSize(size);
           }
-        } catch (err) {
-          console.error('Error picking document:', err);
-        }
-      };
-      
-      const getFileNameFromUri = async (uri) => {
-        try {
-          const fileInfo = await FileSystem.getInfoAsync(uri);
-          return fileInfo.uri ? fileInfo.uri.split('/').pop() : 'Unknown File'; 
-        } catch (error) {
-          console.error('Error getting file name:', error);
-          return 'Unknown File';
+        } catch (err) {     
         }
       };
       
@@ -102,7 +86,7 @@ const addThoughts = () => {
         try {
           const fileInfo = await FileSystem.getInfoAsync(uri);
           if (fileInfo.size) {
-            return fileInfo.size;  // Return the file size in bytes
+            return fileInfo.size; 
           } else {
             return 'Unknown Size';
           }

@@ -1,18 +1,18 @@
 import { View, Text, SafeAreaView, StatusBar, TextInput, TouchableOpacity, Alert, ScrollView } from 'react-native'
 import React, { useState } from 'react'
-import BackIcon from "../../components/backIcon.jsx";
+import BackIcon from "../components/backIcon.jsx";
 import { Image } from 'react-native';
-import VideoIcon from '../../components/videoIcon.jsx';
-import ImageIcon from '../../components/imageIcon.jsx';
-import FileIcon from '../../components/fileIcon.jsx';
+import VideoIcon from '../components/videoIcon.jsx';
+import ImageIcon from '../components/imageIcon.jsx';
+import FileIcon from '../components/fileIcon.jsx';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
-import CrossIcon from '../../components/crossIcon.jsx';
-import PdfIcon from '../../components/pdfIcon.jsx';
+import CrossIcon from '../components/crossIcon.jsx';
+import PdfIcon from '../components/pdfIcon.jsx';
 import * as FileSystem from 'expo-file-system';
-import PlayIcon from '../../components/playIcon.jsx';
-import { postThought } from '../../features/thoughtsSlice.js';
-import { fetchThoughts } from '../../features/thoughtsSlice.js';
+import PlayIcon from '../components/playIcon.jsx';
+import { postThought } from '../features/thoughtsSlice.js';
+import { fetchThoughts } from '../features/thoughtsSlice.js';
 import { useDispatch } from 'react-redux';
 import { router } from 'expo-router';
 
@@ -66,10 +66,10 @@ const addThoughts = () => {
             type: 'application/pdf',
           });
       
-          console.log('Document Picker Result:', result);  // Log the full result object
+          console.log('Document Picker Result:', result); 
       
           if (result.type !== 'cancel') {
-            const fileUri = result.uri || result.assets?.[0]?.uri;  // Check both possibilities
+            const fileUri = result.uri || result.assets?.[0]?.uri;
             if (!fileUri) {
               console.error('No URI found in result');
               return;
@@ -79,9 +79,9 @@ const addThoughts = () => {
             setFileType('file');
       
             const name = await getFileNameFromUri(fileUri);
-            const size = await getFileSizeFromUri(fileUri);  // Get file size
+            const size = await getFileSizeFromUri(fileUri);
             setFileName(name);
-            setFileSize(size);  // Set the file size
+            setFileSize(size);
           }
         } catch (err) {
           console.error('Error picking document:', err);

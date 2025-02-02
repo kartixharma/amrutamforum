@@ -43,8 +43,8 @@ export default function Index() {
     loadFonts();
   }, []);
 
-  if (status === 'loading' || tstatus === 'loading') return <ActivityIndicator size="large" color="#3A643B" />;
-  if (status === 'failed') return <Text style={{ color: 'red' }}>Error: {error}</Text>;
+  if (status === 'loading' || tstatus === 'loading') return <View className="flex-1"><ActivityIndicator size="large" color="#3A643B" /></View>;
+  if (status === 'failed') return <Text style={{ flex:1, color: 'red' }}>Error: {error}</Text>;
   if (tstatus === 'failed') return <Text style={{ color: 'red' }}>Error: {terror}</Text>;
 
 
